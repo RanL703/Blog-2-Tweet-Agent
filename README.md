@@ -2,7 +2,7 @@
 
 Turn your blog posts into engaging Twitter threads automatically! This AI-powered bot uses Google's Gemini AI to transform your blog content into perfectly crafted tweet threads, making your content sharing smarter and more efficient.
 
-📖 **Follow my blog**: [Eltrus Blogs](https://theranlblog-psi-inky.vercel.app/) - Where I share my tech adventures and insights!
+📖 **Follow my blog**: [TheRanLBlog](https://theranlblog-psi-inky.vercel.app/) - Where I share my tech adventures and insights!
 
 ## ✨ Features
 
