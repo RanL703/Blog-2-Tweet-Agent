@@ -1,35 +1,24 @@
 import os
 import argparse
 from dotenv import load_dotenv
-from blog_reader import get_blog_posts
+from blog_reader import monitor_blog_directory, BlogPost
 from tweet_generator import TweetGenerator
 from twitter_poster import TwitterPoster
 
-def process_blog_posts(directory: str, dry_run: bool):
-    print(f"Processing blog posts from: {directory}")
+def process_blog_post(post: BlogPost, dry_run: bool):
+    """Process a single blog post."""
+    print(f"Processing: {os.path.basename(post.filepath)}")
     
-    # Get all blog posts
-    posts = get_blog_posts(directory)
-    
-    if not posts:
-        print("No markdown files found in the specified directory")
-        return
-
-    # Initialize generators
     generator = TweetGenerator()
-    poster = TwitterPoster()
-
-    # Process each post
-    for post in posts:
-        print(f"Processing: {os.path.basename(post.filepath)}")
-        tweets = generator.generate_tweets(post)
-        
-        if dry_run:
-            print("\nGenerated tweets (dry run):")
-            for i, tweet in enumerate(tweets):
-                print(f"\nTweet {i+1}:\n{tweet}")
-        else:
-            poster.post_tweets(tweets)
+    tweets = generator.generate_tweets(post)
+    
+    if dry_run:
+        print("\nGenerated tweets (dry run):")
+        for i, tweet in enumerate(tweets):
+            print(f"\nTweet {i+1}:\n{tweet}")
+    else:
+        poster = TwitterPoster()
+        poster.post_tweets(tweets)
 
 def main():
     parser = argparse.ArgumentParser()
@@ -46,7 +35,19 @@ def main():
     if not os.path.exists(posts_path):
         raise ValueError(f"Directory does not exist: {posts_path}")
 
-    process_blog_posts(posts_path, args.dry_run)
+    print(f"Starting blog monitor on {posts_path}")
+    observer = monitor_blog_directory(
+        posts_path,
+        lambda post: process_blog_post(post, args.dry_run)
+    )
+    
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+        print("\nStopping blog monitor...")
+    observer.join()
 
 if __name__ == "__main__":
     main()
