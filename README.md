@@ -1,8 +1,16 @@
 # 🤖 Blog to Twitter Bot
 
-Turn your blog posts into engaging Twitter threads automatically! This AI-powered bot uses Google's Gemini AI to transform your blog content into perfectly crafted tweet threads, making your content sharing smarter and more efficient.
+Turn your blog posts into engaging Twitter threads automatically! This AI-powered bot monitors your blog directory and instantly creates Twitter threads from new posts.
 
 📖 **Follow my blog**: [TheRanLBlog](https://theranlblog-psi-inky.vercel.app/) - Where I share my tech adventures and insights!
+
+## 🎉 What's New in v2.0
+
+- ✨ **Real-time Monitoring**: Now watches your blog directory for new posts
+- 🚀 **Instant Processing**: Automatically handles new markdown files as they arrive
+- 🔄 **Startup Processing**: Picks up the latest post when you start the bot
+- ⚡ **Smart Directory Handling**: Better path management across operating systems
+- 🛡️ **Improved Error Handling**: Better recovery from API and file system issues
 
 ## ✨ Features
 
@@ -12,6 +20,9 @@ Turn your blog posts into engaging Twitter threads automatically! This AI-powere
 - ⏱️ Smart rate limiting and error handling
 - 🔄 Supports dry run mode for testing
 - 🎯 Optimized for engagement and readability
+- 🔍 Real-time blog directory monitoring
+- 🚀 Instant tweet generation for new posts
+- 🔄 Processes latest post on startup
 
 ## 🚀 Quick Start
 
@@ -55,11 +66,26 @@ Turn your blog posts into engaging Twitter threads automatically! This AI-powere
 
 ## 💡 Usage
 
-### Test Mode (Recommended First Run)
+> 🆕 **New Directory Monitoring Feature**
+The bot now actively monitors your blog directory:
+
+### Directory Monitoring
+The bot now monitors your blog directory for new markdown files:
+```bash
+python src/main.py
+```
+- Processes the most recent post on startup
+- Watches for new markdown files
+- Automatically generates and posts tweets for new content
+- Use Ctrl+C to stop monitoring
+
+### Test Mode
 ```bash
 python src/main.py --dry-run
 ```
-This will show you the generated tweets without posting them.
+- Same monitoring functionality
+- Shows generated tweets without posting
+- Perfect for testing your setup
 
 ### Production Mode
 ```bash
@@ -69,22 +95,44 @@ This will generate and post the tweets.
 
 ## 🛠️ How It Works
 
-1. **Blog Post Processing**
+1. **Continuous Monitoring** _(New!)_
+   - Watches your specified blog directory
+   - Detects new markdown files instantly
+   - Processes the latest post on startup
+   - Handles file system events reliably
+
+2. **Blog Post Processing**
    - Scans your specified directory for markdown files
    - Extracts frontmatter metadata and content
    - Supports Hugo-style blog posts
 
-2. **AI Tweet Generation**
+3. **AI Tweet Generation**
    - Uses Gemini AI to analyze your blog content
    - Generates engaging, conversational tweet threads
    - Maintains natural flow while preserving key information
    - Automatically includes relevant hashtags
 
-3. **Smart Twitter Posting**
+4. **Smart Twitter Posting**
    - Creates a main tweet followed by threaded replies
    - Handles rate limiting intelligently
    - Implements exponential backoff for reliability
    - Provides detailed progress feedback
+
+## 📝 Changelog
+
+### Version 2.0
+- Added real-time directory monitoring
+- Added automatic processing of new files
+- Added latest post processing on startup
+- Improved cross-platform path handling
+- Enhanced error recovery and logging
+- Updated documentation with new features
+
+### Version 1.0
+- Initial release with basic tweet generation
+- Manual blog post processing
+- Thread creation capabilities
+- Rate limit handling
 
 ## ⚙️ Customization
 
@@ -120,3 +168,4 @@ If you find this bot useful, don't forget to star the repository! It helps other
 ---
 
 Built with ❤️ for bloggers who love automation
+````
