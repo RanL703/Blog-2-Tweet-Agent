@@ -1,5 +1,6 @@
 import os
 import argparse
+import time
 from dotenv import load_dotenv
 from blog_reader import monitor_blog_directory, BlogPost
 from tweet_generator import TweetGenerator
